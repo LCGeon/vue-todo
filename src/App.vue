@@ -84,10 +84,6 @@ button {
 .shadow {
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
 }
-.app {
-  font-size: 50px;
-  font-family: "TodoFont";
-}
 .todoFont {
   font-family: "TodoFont";
 }

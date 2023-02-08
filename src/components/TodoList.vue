@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul>
+    <TransitionGroup name="fade">
       <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
         <i
           class="bi bi-check checkBtn"
@@ -14,7 +14,7 @@
           ><i class="bi bi-trash"></i
         ></span>
       </li>
-    </ul>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -65,5 +65,14 @@ li {
 .removeBtn {
   margin-left: auto;
   color: #de4343;
+}
+.fade-leave-active,
+.fade-enter-active {
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.5, 1);
+}
+.fade-leave-to,
+.fade-enter {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

@@ -9,22 +9,31 @@
     <span class="addContainer" @click="addTodo">
       <i class="bi bi-card-checklist addBtn"></i
     ></span>
+
+    <Teleport to="body">
+      <CommonModal :show="showModal" @close="showModal = false"> </CommonModal>
+    </Teleport>
   </div>
 </template>
 
 <script>
+import CommonModal from "../components/common/CommonModal.vue";
 export default {
   data() {
     return {
       newTodoItem: "",
+      showModal: false,
     };
   },
+  components: { CommonModal },
+
   methods: {
     addTodo() {
       if (this.newTodoItem !== "") {
         this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
-        // this.$router.go(this.$router.currentRoute);
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearInput() {
