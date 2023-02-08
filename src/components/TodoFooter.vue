@@ -1,5 +1,5 @@
 <template>
-  <div class="clearAllContainer">
+  <div class="clearAllContainer shadow">
     <span class="clearAllBtn" @click="clearTodo">Clear All</span>
   </div>
 </template>
@@ -8,8 +8,7 @@
 export default {
   methods: {
     clearTodo() {
-      localStorage.clear();
-      this.$router.go(this.$router.currentRoute);
+      this.$emit("clearItem");
     },
   },
 };

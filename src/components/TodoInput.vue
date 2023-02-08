@@ -19,16 +19,12 @@ export default {
       newTodoItem: "",
     };
   },
-  mounted() {
-    this.$refs.todoInput.focus();
-  },
   methods: {
     addTodo() {
       if (this.newTodoItem !== "") {
-        const obj = { completed: false, item: this.newTodoItem };
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
-        this.$router.go(this.$router.currentRoute);
+        // this.$router.go(this.$router.currentRoute);
       }
     },
     clearInput() {
