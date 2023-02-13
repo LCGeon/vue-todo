@@ -1,7 +1,11 @@
 <template>
   <div>
     <TransitionGroup name="fade">
-      <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
+      <li
+        v-for="(todoItem, index) in this.storedTodoItems"
+        :key="todoItem"
+        class="shadow"
+      >
         <i
           class="bi bi-check checkBtn"
           @click="toggleComplete(todoItem, index)"
@@ -10,7 +14,7 @@
         <span :class="{ textCompleted: todoItem.completed }">
           {{ todoItem.item }}</span
         >
-        <span class="removeBtn" @click="removeTodo(todoItem, index)"
+        <span class="removeBtn" @click="removeTodo({ todoItem, index })"
           ><i class="bi bi-trash"></i
         ></span>
       </li>
@@ -19,15 +23,22 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 export default {
-  props: ["propsdata"],
   methods: {
-    removeTodo(todoItem, index) {
-      this.$emit("removeItem", todoItem, index);
-    },
-    toggleComplete(todoItem, index) {
-      this.$emit("toggleItem", todoItem, index);
-    },
+    ...mapMutations({
+      removeTodo: "removeOneItem",
+      toggleComplete: "toggleOneItem",
+    }),
+    // removeTodo(todoItem, index) {
+    //   this.$store.commit("removeOneItem", { todoItem, index });
+    // },
+    // toggleComplete(todoItem, index) {
+    //   this.$store.commit("toggleOneItem", todoItem, index);
+    // },
+  },
+  computed: {
+    ...mapGetters(["storedTodoItems"]),
   },
 };
 </script>
